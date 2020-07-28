@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+
+    let playerScore = 0;
+    let computerScore = 0;
+    //const computerSelection = computerPlay();
+    console.log(game());
+
+   function computerPlay()
+   {
+       let choiceInt = getRandomInt(3);
+       let choice;
+       switch(choiceInt)
+       {
+            case 0:
+            choice = "Rock";
+            break;
+            case 1:
+            choice = "Paper";
+            break;
+            case 2:
+            choice = "Scissors";
+            break;
+
+       }
+       return choice;
+   }
+
+   function playRound(playerSelection, computerSelection)
+   {
+
+        playerSelectionLower = playerSelection.toLowerCase();
+        computerSelectionLower = computerSelection.toLowerCase();
+       let message = (playerSelection == "rock" && computerSelectionLower == "rock") ? 'Tie' :
+       (playerSelection == "rock" && computerSelectionLower == "paper") ? 'You lose Paper beats Rock' :
+       (playerSelection == "rock" && computerSelectionLower == "scissors") ? 'You win Rock beats Scissors' :
+       (playerSelection == "paper" && computerSelectionLower == "rock") ? 'You win Paper beats Rock' :
+       (playerSelection == "paper" && computerSelectionLower == "paper") ? 'Tie' :
+       (playerSelection == "paper" && computerSelectionLower == "scissors") ? 'You lose Scissors beats Paper' :
+       (playerSelection == "scissors" && computerSelectionLower == "rock") ? 'You lose Rock beats Scissors' :
+       (playerSelection == "scissors" && computerSelectionLower == "paper") ? 'You win Scissors beats Paper' :
+       'tie';
+
+       return message;
+   }
+
+   function game()
+   {
+       for( i = 0; i<5; i++)
+       {
+           
+            let playerSelection = prompt("Enter rock, paper, or scissors.").toLowerCase();
+            let computerSelection = computerPlay();
+            let result = playRound(playerSelection,computerSelection);
+            console.log(result);
+            scoreKeeper(result);
+       }
+       winner();
+   }
+
+   function winner()
+   {
+       if(playerScore > computerScore)
+       {
+           console.log("You beat the computer this game!");
+       }
+       else if(computerScore > playerScore)
+       {
+           console.log("The computer beat you this game.");
+       }
+       else
+       {
+           console.log("You tied the computer this game.");
+       }
+   }
+
+   function scoreKeeper(result)
+   {
+        if (result.includes("You win"))
+        {
+            playerScore++;
+            
+        }
+        else if (result.includes("You lose"))
+        {
+            computerScore++;
+            
+        }
+        
+   }
+
+   function getRandomInt(max) 
+    {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+  </script>
+</body>
+</html>
